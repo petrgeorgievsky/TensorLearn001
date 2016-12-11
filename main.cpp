@@ -1,26 +1,26 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <ctime>
 #include <string>
 #include <cmath>
 
 typedef int (*FindPrime)(const int &n);
 
-// Версия Руслана.
+// Р’РµСЂСЃРёСЏ Р СѓСЃР»Р°РЅР°.
 int FindPrimeCount_Simple(const int &n){
 	return -1;
 }
 
-// Версия Александра Пономарева.
+// Р’РµСЂСЃРёСЏ РђР»РµРєСЃР°РЅРґСЂР° РџРѕРЅРѕРјР°СЂРµРІР°.
 int FindPrimeCount_DivBy2(const int &n){
 	return -1;
 }
 
-// Версия Егора.
+// Р’РµСЂСЃРёСЏ Р•РіРѕСЂР°.
 int FindPrimeCount_Sqrt(const int &n){
 	return -1;
 }
 
-// Версия Петра.
+// Р’РµСЂСЃРёСЏ РџРµС‚СЂР°.
 int FindPrimeCount_Eratosthenes(const int &n){
 	size_t arrSize = n / 8 + (n % 8 != 0);
 	unsigned char* arr = new unsigned char[arrSize];
@@ -28,16 +28,16 @@ int FindPrimeCount_Eratosthenes(const int &n){
 		arr[i] = 255;
 	
 	if(n%8!=0)
-		arr[arrSize-1] &= (((1<<n % 8)-1) << (8- n % 8));// очень страшная побитовая херь, отсекает биты в конце
+		arr[arrSize-1] &= (((1<<n % 8)-1) << (8- n % 8));// РѕС‡РµРЅСЊ СЃС‚СЂР°С€РЅР°СЏ РїРѕР±РёС‚РѕРІР°СЏ С…РµСЂСЊ, РѕС‚СЃРµРєР°РµС‚ Р±РёС‚С‹ РІ РєРѕРЅС†Рµ
 	
-	// Проходим по всем числам от 2 до половины расстояния
+	// РџСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј С‡РёСЃР»Р°Рј РѕС‚ 2 РґРѕ РїРѕР»РѕРІРёРЅС‹ СЂР°СЃСЃС‚РѕСЏРЅРёСЏ
 	for (int i = 2; i<n / 2+1; i++)
-	for (int j = i*2; j<n+1; j += i) // Проходим через все числа и
+	for (int j = i*2; j<n+1; j += i) // РџСЂРѕС…РѕРґРёРј С‡РµСЂРµР· РІСЃРµ С‡РёСЃР»Р° Рё
 		arr[(j - 1) / 8] &= (j%8!=0) ? ~((1 << (8 - j % 8))):254;
 		
 	int summ = 0;
 	for (int i = 0; i < arrSize; i++) {
-		// Считаем количество бит, опять дикострашная побитовая херь
+		// РЎС‡РёС‚Р°РµРј РєРѕР»РёС‡РµСЃС‚РІРѕ Р±РёС‚, РѕРїСЏС‚СЊ РґРёРєРѕСЃС‚СЂР°С€РЅР°СЏ РїРѕР±РёС‚РѕРІР°СЏ С…РµСЂСЊ
 		summ += (arr[i] & 128) >> 7;
 		summ += (arr[i] & 64) >> 6;
 		summ += (arr[i] & 32) >> 5;
@@ -51,7 +51,7 @@ int FindPrimeCount_Eratosthenes(const int &n){
 	return summ;
 }
 
-// Версия Александра Соболева.
+// Р’РµСЂСЃРёСЏ РђР»РµРєСЃР°РЅРґСЂР° РЎРѕР±РѕР»РµРІР°.
 int FindPrimeCount_Async(const int &n){
 	return -1;
 }
@@ -62,7 +62,7 @@ void PerfCheck(const std::string &name,FindPrime findFunc,const int &n){
 	t = clock() - t;
 	std::cout << name << " Method " << 	 " returned: " << retVal <<
 										"; required: " << t << " clocks and " 
-										<< (static_cast<double>(t))/CLOCKS_PER_SEC << " seconds." << std::endl;
+<< (static_cast<double>(t))/CLOCKS_PER_SEC << " seconds." << std::endl;
 }
 
 // Entrypoint.

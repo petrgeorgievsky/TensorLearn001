@@ -1,3 +1,3 @@
-c++ main.cpp -o program.exe
+g++ main.cpp -o program.exe
 program.exe
 pause
