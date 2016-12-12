@@ -3,14 +3,24 @@
 #include <string>
 #include <cmath>
 
-typedef int (*FindPrime)(const int &n);
+typedef unsigned long (*FindPrime)(const unsigned long &n);
 
 // Версия Руслана
-unsigned long SummSimple(unsigned long);
-bool Simple(unsigned long);
 
+bool Simple_Cheak(const unsigned long &n)
+{
+	if(n == 2) return true;
+	for(unsigned long i = 2; i < n; i++)
+	{
+		if(n % i == 0)
+		{
+			return false;
+		}
+	}
+	return true;
+}
 
-unsigned long FindPrimeCount_Simple(unsigned long n)
+unsigned long FindPrimeCount_Simple(const unsigned long &n)
 {
 	unsigned long Summ = 0;
 	for(unsigned long i = 2; i < n; i++)
@@ -22,47 +32,36 @@ unsigned long FindPrimeCount_Simple(unsigned long n)
 	}
 	return Summ;
 }
-bool Simple_Cheak(unsigned long n)
-{
-	if(n == 2)return true;
-	for(unsigned long i = 2 i < n; i++)
-	{
-		if(n % i == 0)
-		{
-			return false;
-		}
-	}
-	return true;
-}
-}
+
+
 
 // Версия Александра Пономарева.
-int FindPrimeCount_DivBy2(const int &n){
+unsigned long FindPrimeCount_DivBy2(const unsigned long &n){
 	return -1;
 }
 
 // Версия Егора.
-int FindPrimeCount_Sqrt(const int &n){
+unsigned long FindPrimeCount_Sqrt(const unsigned long &n){
 	return -1;
 }
 
 // Версия Петра.
-int FindPrimeCount_Eratosthenes(const int &n){
+unsigned long FindPrimeCount_Eratosthenes(const unsigned long &n){
 	size_t arrSize = n / 8 + (n % 8 != 0);
 	unsigned char* arr = new unsigned char[arrSize];
-	for (int i = 0; i<arrSize; i++) 
+	for (unsigned long i = 0; i<arrSize; i++) 
 		arr[i] = 255;
 	
 	if(n%8!=0)
 		arr[arrSize-1] &= (((1<<n % 8)-1) << (8- n % 8));// очень страшная побитовая херь, отсекает биты в конце
 	
 	// Проходим по всем числам от 2 до половины расстояния
-	for (int i = 2; i<n / 2+1; i++)
-	for (int j = i*2; j<n+1; j += i) // Проходим через все числа и
+	for (unsigned long i = 2; i<n / 2+1; i++)
+	for (unsigned long j = i*2; j<n+1; j += i) // Проходим через все числа и
 		arr[(j - 1) / 8] &= (j%8!=0) ? ~((1 << (8 - j % 8))):254;
 		
-	int summ = 0;
-	for (int i = 0; i < arrSize; i++) {
+	unsigned long summ = 0;
+	for (unsigned long i = 0; i < arrSize; i++) {
 		// Считаем количество бит, опять дикострашная побитовая херь
 		summ += (arr[i] & 128) >> 7;
 		summ += (arr[i] & 64) >> 6;
@@ -78,7 +77,7 @@ int FindPrimeCount_Eratosthenes(const int &n){
 }
 
 // Версия Александра Соболева.
-int FindPrimeCount_Async(const int &n){
+unsigned long FindPrimeCount_Async(const unsigned long &n){
 	return -1;
 }
 
