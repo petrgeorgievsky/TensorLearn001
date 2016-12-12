@@ -1,17 +1,16 @@
-п»ї#include <iostream>
+#include <iostream>
 #include <ctime>
 #include <string>
 #include <cmath>
 
 typedef unsigned long (*FindPrime)(const unsigned long &n);
 
-// Р’РµСЂСЃРёСЏ Р СѓСЃР»Р°РЅР°
+// Версия Руслана
 
 bool Simple_Cheak(const unsigned long &n)
 {
-	if(n == 2)return true;
-	if(n == 1)return true;
-	for(unsigned long i = 2; i < n; i++)
+	if(n == 2)return true
+	for(unsigned long i = 2; i <= n; i++)
 	{
 		if(n % i == 0)
 		{
@@ -24,7 +23,7 @@ bool Simple_Cheak(const unsigned long &n)
 unsigned long FindPrimeCount_Simple(const unsigned long &n)
 {
 unsigned long Summ = 0;
-	for(unsigned long i = 1; i < n; i++)
+	for(unsigned long i = 2; i <= n; i++)
 	{
 		if(Simple_Cheak(i))
 		{
@@ -36,16 +35,16 @@ unsigned long Summ = 0;
 
 
 
-// Р’РµСЂСЃРёСЏ РђР»РµРєСЃР°РЅРґСЂР° РџРѕРЅРѕРјР°СЂРµРІР°.
+// Версия Александра Пономарева.
 unsigned long FindPrimeCount_DivBy2(const unsigned long &n){
 	return -1;
 }
 
-// Р’РµСЂСЃРёСЏ Р•РіРѕСЂР°.
-unsigned long FindPrimeCount_Sqrt(const unsigned long &n) //Р•РґРёРЅРёС†Сѓ РёСЃРєР»СЋС‡Р°РµРј РёР· РїСЂРѕСЃС‚С‹С… С‡РёСЃРµР».
+// Версия Егора.
+unsigned long FindPrimeCount_Sqrt(const unsigned long &n) //Единицу исключаем из простых чисел.
 {
-	int count = 0; //РЎС‡РµС‚С‡РёРє РїСЂРѕСЃС‚С‹С… С‡РёСЃРµР»
-	bool flag; //Р¤Р»Р°Рі, РїРѕРєР°Р·С‹РІР°СЋС‰РёР№ С‚РµРєСѓС‰РµРµ СЃРѕСЃС‚РѕСЏРЅРёРµ С‡РёСЃР»Р° "true - РїСЂРѕСЃС‚РѕРµ","false - РЅРµ РїСЂРѕСЃС‚РѕРµ"
+	int count = 0; //Счетчик простых чисел
+	bool flag; //Флаг, показывающий текущее состояние числа "true - простое","false - не простое"
 	for (int i = 2; i < n; i++)
 	{
 		flag = true;
@@ -62,7 +61,7 @@ unsigned long FindPrimeCount_Sqrt(const unsigned long &n) //Р•РґРёРЅРёС†Сѓ РёСЃР
 	return count;
 }
 
-// Р’РµСЂСЃРёСЏ РџРµС‚СЂР°.
+// Версия Петра.
 unsigned long FindPrimeCount_Eratosthenes(const unsigned long &n){
 	size_t arrSize = n / 8 + (n % 8 != 0);
 	unsigned char* arr = new unsigned char[arrSize];
@@ -70,16 +69,16 @@ unsigned long FindPrimeCount_Eratosthenes(const unsigned long &n){
 		arr[i] = 255;
 	
 	if(n%8!=0)
-		arr[arrSize-1] &= (((1<<(n-1) % 8)-1) << (8- (n-1) % 8));// РѕС‡РµРЅСЊ СЃС‚СЂР°С€РЅР°СЏ РїРѕР±РёС‚РѕРІР°СЏ С…РµСЂСЊ, РѕС‚СЃРµРєР°РµС‚ Р±РёС‚С‹ РІ РєРѕРЅС†Рµ
+		arr[arrSize-1] &= (((1<<(n-1) % 8)-1) << (8- (n-1) % 8));// очень страшная побитовая херь, отсекает биты в конце
 	
-	// РџСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј С‡РёСЃР»Р°Рј РѕС‚ 2 РґРѕ РїРѕР»РѕРІРёРЅС‹ СЂР°СЃСЃС‚РѕСЏРЅРёСЏ
+	// Проходим по всем числам от 2 до половины расстояния
 	for (unsigned long i = 2; i<n / 2+1; i++)
-	for (unsigned long j = i*2; j<n+1; j += i) // РџСЂРѕС…РѕРґРёРј С‡РµСЂРµР· РІСЃРµ С‡РёСЃР»Р° Рё
+	for (unsigned long j = i*2; j<n+1; j += i) // Проходим через все числа и
 		arr[(j - 1) / 8] &= (j%8!=0) ? ~((1 << (8 - j % 8))):254;
 		
 	unsigned long summ = 0;
 	for (unsigned long i = 0; i < arrSize; i++) {
-		// РЎС‡РёС‚Р°РµРј РєРѕР»РёС‡РµСЃС‚РІРѕ Р±РёС‚, РѕРїСЏС‚СЊ РґРёРєРѕСЃС‚СЂР°С€РЅР°СЏ РїРѕР±РёС‚РѕРІР°СЏ С…РµСЂСЊ
+		// Считаем количество бит, опять дикострашная побитовая херь
 		summ += (arr[i] & 128) >> 7;
 		summ += (arr[i] & 64) >> 6;
 		summ += (arr[i] & 32) >> 5;
@@ -93,7 +92,7 @@ unsigned long FindPrimeCount_Eratosthenes(const unsigned long &n){
 	return summ;
 }
 
-// Р’РµСЂСЃРёСЏ РђР»РµРєСЃР°РЅРґСЂР° РЎРѕР±РѕР»РµРІР°.
+// Версия Александра Соболева.
 unsigned long FindPrimeCount_Async(const unsigned long &n){
 	return -1;
 }
