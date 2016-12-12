@@ -68,7 +68,7 @@ unsigned long FindPrimeCount_Eratosthenes(const unsigned long &n){
 	unsigned char* arr = new unsigned char[arrSize];
 	for (unsigned long i = 0; i<arrSize; i++) 
 		arr[i] = 255;
-	
+	arr[0]=127;
 	if(n%8!=0)
 		arr[arrSize-1] &= (((1<<(n-1) % 8)-1) << (8- (n-1) % 8));// очень страшная побитовая херь, отсекает биты в конце
 	
