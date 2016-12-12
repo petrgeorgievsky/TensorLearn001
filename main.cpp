@@ -97,5 +97,6 @@ int main()
 	}
 	else
 		std::cout << "'N' must be positive and greater than zero.\n";
+	system("pause"); //Задержка консоли
 	return 0;
 }
