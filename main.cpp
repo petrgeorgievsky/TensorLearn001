@@ -10,19 +10,19 @@ unsigned long SummSimple(unsigned long);
 bool Simple(unsigned long);
 
 
-unsigned long SummSimple(unsigned long n)
+unsigned long FindPrimeCount_Simple(unsigned long n)
 {
 	unsigned long Summ = 0;
 	for(unsigned long i = 2; i < n; i++)
 	{
-		if(Simple(i))
+		if(Simple_Cheak(i))
 		{
 			Summ ++;
 		}
 	}
 	return Summ;
 }
-bool Simple(unsigned long n)
+bool Simple_Cheak(unsigned long n)
 {
 	if(n == 2)return true;
 	for(unsigned long i = 2 i < n; i++)
