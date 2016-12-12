@@ -5,7 +5,7 @@
 
 typedef int (*FindPrime)(const int &n);
 
-// Проект Руслана
+// Версия Руслана
 unsigned long SummSimple(unsigned long);
 bool Simple(unsigned long);
 
@@ -36,17 +36,17 @@ bool Simple(unsigned long n)
 }
 }
 
-// Проект Александра Пономарева
+// Версия Александра Пономарева.
 int FindPrimeCount_DivBy2(const int &n){
 	return -1;
 }
 
-// Проект Егора
+// Версия Егора.
 int FindPrimeCount_Sqrt(const int &n){
 	return -1;
 }
 
-// Проект Петра
+// Версия Петра.
 int FindPrimeCount_Eratosthenes(const int &n){
 	size_t arrSize = n / 8 + (n % 8 != 0);
 	unsigned char* arr = new unsigned char[arrSize];
@@ -54,16 +54,16 @@ int FindPrimeCount_Eratosthenes(const int &n){
 		arr[i] = 255;
 	
 	if(n%8!=0)
-		arr[arrSize-1] &= (((1<<n % 8)-1) << (8- n % 8));// î÷åíü ñòðàøíàÿ ïîáèòîâàÿ õåðü, îòñåêàåò áèòû â êîíöå
+		arr[arrSize-1] &= (((1<<n % 8)-1) << (8- n % 8));// очень страшная побитовая херь, отсекает биты в конце
 	
-	// Ïðîõîäèì ïî âñåì ÷èñëàì îò 2 äî ïîëîâèíû ðàññòîÿíèÿ
+	// Проходим по всем числам от 2 до половины расстояния
 	for (int i = 2; i<n / 2+1; i++)
-	for (int j = i*2; j<n+1; j += i) // Ïðîõîäèì ÷åðåç âñå ÷èñëà è
+	for (int j = i*2; j<n+1; j += i) // Проходим через все числа и
 		arr[(j - 1) / 8] &= (j%8!=0) ? ~((1 << (8 - j % 8))):254;
 		
 	int summ = 0;
 	for (int i = 0; i < arrSize; i++) {
-		// Ñ÷èòàåì êîëè÷åñòâî áèò, îïÿòü äèêîñòðàøíàÿ ïîáèòîâàÿ õåðü
+		// Считаем количество бит, опять дикострашная побитовая херь
 		summ += (arr[i] & 128) >> 7;
 		summ += (arr[i] & 64) >> 6;
 		summ += (arr[i] & 32) >> 5;
@@ -77,7 +77,7 @@ int FindPrimeCount_Eratosthenes(const int &n){
 	return summ;
 }
 
-// Проект Александра Соболева
+// Версия Александра Соболева.
 int FindPrimeCount_Async(const int &n){
 	return -1;
 }
