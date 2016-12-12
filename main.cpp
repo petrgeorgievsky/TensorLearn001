@@ -1,26 +1,52 @@
-п»ї#include <iostream>
+#include <iostream>
 #include <ctime>
 #include <string>
 #include <cmath>
 
 typedef int (*FindPrime)(const int &n);
 
-// Р’РµСЂСЃРёСЏ Р СѓСЃР»Р°РЅР°.
-int FindPrimeCount_Simple(const int &n){
-	return -1;
+// Версия Руслана.
+unsigned long SummSimple(unsigned long);
+bool Simple(unsigned long);
+
+
+unsigned long SummSimple(unsigned long n)
+{
+	unsigned long Summ = 0;
+	for(unsigned long i = 2; i < n; i++)
+	{
+		if(Simple(i))
+		{
+			Summ ++;
+		}
+	}
+	return Summ;
+}
+bool Simple(unsigned long n)
+{
+	if(n == 2)return true;
+	for(unsigned long i = 2 i < n; i++)
+	{
+		if(n % i == 0)
+		{
+			return false;
+		}
+	}
+	return true;
+}
 }
 
-// Р’РµСЂСЃРёСЏ РђР»РµРєСЃР°РЅРґСЂР° РџРѕРЅРѕРјР°СЂРµРІР°.
+// Версия Александра Пономарева.
 int FindPrimeCount_DivBy2(const int &n){
 	return -1;
 }
 
-// Р’РµСЂСЃРёСЏ Р•РіРѕСЂР°.
+// Версия Егора.
 int FindPrimeCount_Sqrt(const int &n){
 	return -1;
 }
 
-// Р’РµСЂСЃРёСЏ РџРµС‚СЂР°.
+// Версия Петра.
 int FindPrimeCount_Eratosthenes(const int &n){
 	size_t arrSize = n / 8 + (n % 8 != 0);
 	unsigned char* arr = new unsigned char[arrSize];
@@ -28,16 +54,16 @@ int FindPrimeCount_Eratosthenes(const int &n){
 		arr[i] = 255;
 	
 	if(n%8!=0)
-		arr[arrSize-1] &= (((1<<n % 8)-1) << (8- n % 8));// РѕС‡РµРЅСЊ СЃС‚СЂР°С€РЅР°СЏ РїРѕР±РёС‚РѕРІР°СЏ С…РµСЂСЊ, РѕС‚СЃРµРєР°РµС‚ Р±РёС‚С‹ РІ РєРѕРЅС†Рµ
+		arr[arrSize-1] &= (((1<<n % 8)-1) << (8- n % 8));// очень страшная побитовая херь, отсекает биты в конце
 	
-	// РџСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј С‡РёСЃР»Р°Рј РѕС‚ 2 РґРѕ РїРѕР»РѕРІРёРЅС‹ СЂР°СЃСЃС‚РѕСЏРЅРёСЏ
+	// Проходим по всем числам от 2 до половины расстояния
 	for (int i = 2; i<n / 2+1; i++)
-	for (int j = i*2; j<n+1; j += i) // РџСЂРѕС…РѕРґРёРј С‡РµСЂРµР· РІСЃРµ С‡РёСЃР»Р° Рё
+	for (int j = i*2; j<n+1; j += i) // Проходим через все числа и
 		arr[(j - 1) / 8] &= (j%8!=0) ? ~((1 << (8 - j % 8))):254;
 		
 	int summ = 0;
 	for (int i = 0; i < arrSize; i++) {
-		// РЎС‡РёС‚Р°РµРј РєРѕР»РёС‡РµСЃС‚РІРѕ Р±РёС‚, РѕРїСЏС‚СЊ РґРёРєРѕСЃС‚СЂР°С€РЅР°СЏ РїРѕР±РёС‚РѕРІР°СЏ С…РµСЂСЊ
+		// Считаем количество бит, опять дикострашная побитовая херь
 		summ += (arr[i] & 128) >> 7;
 		summ += (arr[i] & 64) >> 6;
 		summ += (arr[i] & 32) >> 5;
@@ -51,7 +77,7 @@ int FindPrimeCount_Eratosthenes(const int &n){
 	return summ;
 }
 
-// Р’РµСЂСЃРёСЏ РђР»РµРєСЃР°РЅРґСЂР° РЎРѕР±РѕР»РµРІР°.
+// Версия Александра Соболева.
 int FindPrimeCount_Async(const int &n){
 	return -1;
 }
