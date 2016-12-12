@@ -48,7 +48,7 @@ bool Medium_Cheak(const unsigned long &n)
 	return true;
 }
 
-unsigned long FindPrimeCount_Medium(const unsigned long &n)
+unsigned long FindPrimeCount_DivBy2(const unsigned long &n)
 {
 unsigned long Summ = 0;
 	for(unsigned long i = 1; i < n; i++)
