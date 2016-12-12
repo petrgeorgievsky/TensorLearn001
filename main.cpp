@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <ctime>
 #include <string>
 #include <cmath>
@@ -42,7 +42,7 @@ unsigned long FindPrimeCount_DivBy2(const unsigned long &n){
 }
 
 // Версия Егора.
-int FindPrimeCount_Sqrt(const int &n) //Единицу исключаем из простых чисел.
+unsigned long FindPrimeCount_Sqrt(const unsigned long &n) //Единицу исключаем из простых чисел.
 {
 	int count = 0; //Счетчик простых чисел
 	bool flag; //Флаг, показывающий текущее состояние числа "true - простое","false - не простое"
