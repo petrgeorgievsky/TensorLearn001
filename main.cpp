@@ -9,7 +9,8 @@ typedef unsigned long (*FindPrime)(const unsigned long &n);
 
 bool Simple_Cheak(const unsigned long &n)
 {
-	if(n == 2) return true;
+	if(n == 2)return true;
+	if(n == 1)return true;
 	for(unsigned long i = 2; i < n; i++)
 	{
 		if(n % i == 0)
@@ -22,8 +23,8 @@ bool Simple_Cheak(const unsigned long &n)
 
 unsigned long FindPrimeCount_Simple(const unsigned long &n)
 {
-	unsigned long Summ = 0;
-	for(unsigned long i = 2; i < n; i++)
+unsigned long Summ = 0;
+	for(unsigned long i = 1; i < n; i++)
 	{
 		if(Simple_Cheak(i))
 		{
@@ -53,7 +54,7 @@ unsigned long FindPrimeCount_Eratosthenes(const unsigned long &n){
 		arr[i] = 255;
 	
 	if(n%8!=0)
-		arr[arrSize-1] &= (((1<<n % 8)-1) << (8- n % 8));// очень страшная побитовая херь, отсекает биты в конце
+		arr[arrSize-1] &= (((1<<(n-1) % 8)-1) << (8- (n-1) % 8));// очень страшная побитовая херь, отсекает биты в конце
 	
 	// Проходим по всем числам от 2 до половины расстояния
 	for (unsigned long i = 2; i<n / 2+1; i++)
