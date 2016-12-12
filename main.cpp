@@ -13,7 +13,7 @@ bool Simple(unsigned long);
 unsigned long FindPrimeCount_Simple(unsigned long n)
 {
 	unsigned long Summ = 0;
-	for(unsigned long i = 2; i < n; i++)
+	for(unsigned long i = 1; i < n+1; i++)
 	{
 		if(Simple_Cheak(i))
 		{
@@ -25,7 +25,8 @@ unsigned long FindPrimeCount_Simple(unsigned long n)
 bool Simple_Cheak(unsigned long n)
 {
 	if(n == 2)return true;
-	for(unsigned long i = 2 i < n; i++)
+	if(n == 1)return true;
+	for(unsigned long i = 2 i < n+1; i++)
 	{
 		if(n % i == 0)
 		{
