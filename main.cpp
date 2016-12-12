@@ -1,13 +1,40 @@
-﻿#include <iostream>
+#include <iostream>
 #include <ctime>
 #include <string>
 #include <cmath>
 
 typedef int (*FindPrime)(const int &n);
 
-// Версия Руслана.
-int FindPrimeCount_Simple(const int &n){
-	return -1;
+// Версия Руслана
+unsigned long SummSimple(unsigned long);
+bool Simple(unsigned long);
+
+
+unsigned long FindPrimeCount_Simple(unsigned long n)
+{
+	unsigned long Summ = 0;
+	for(unsigned long i = 1; i < n+1; i++)
+	{
+		if(Simple_Cheak(i))
+		{
+			Summ ++;
+		}
+	}
+	return Summ;
+}
+bool Simple_Cheak(unsigned long n)
+{
+	if(n == 2)return true;
+	if(n == 1)return true;
+	for(unsigned long i = 2 i < n+1; i++)
+	{
+		if(n % i == 0)
+		{
+			return false;
+		}
+	}
+	return true;
+}
 }
 
 // Версия Александра Пономарева.
