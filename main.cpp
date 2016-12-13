@@ -2,6 +2,7 @@
 #include <ctime>
 #include <string>
 #include <cmath>
+#include <future>
 
 typedef unsigned long (*FindPrime)(const unsigned long &n);
 
@@ -34,6 +35,25 @@ unsigned long Summ = 0;
 	return Summ;
 }
 
+unsigned long finder(const unsigned long begin,unsigned long end)
+{
+    int count=0;
+    for(int setNum=begin;setNum<end;setNum++)
+    {
+        bool isSimple = true;
+        for(int j=2;j<=sqrt(setNum);j++)
+        {
+            if(setNum%j==0)
+            {
+                isSimple = false;
+                break;
+            }
+        }
+        if(isSimple)
+            count++;
+    }
+    return count;
+}
 
 
 // Версия Александра Пономарева.
@@ -115,7 +135,24 @@ unsigned long FindPrimeCount_Eratosthenes(const unsigned long &n){
 
 // Версия Александра Соболева.
 unsigned long FindPrimeCount_Async(const unsigned long &n){
-	return -1;
+	    if(n<2) return 0;
+    if(n==2) return 1;
+    if(n<5) return 2;
+
+    auto a = 2;
+    auto b = n/4;
+    auto c = n/2;
+    auto d = b+c;
+
+    std::future<unsigned long> fut [4]{std::async(finder,a,b),
+                                      std::async(finder,b,c),
+                                      std::async(finder,c,d),
+                                      std::async(finder,d,n)};
+    auto rez = 0;
+    for(auto i= 0;i<4;i++)
+        rez+=fut[i].get();
+
+    return rez;
 }
 
 void PerfCheck(const std::string &name,FindPrime findFunc,const int &n){
