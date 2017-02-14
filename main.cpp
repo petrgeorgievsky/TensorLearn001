@@ -25,7 +25,7 @@ bool Simple_Cheak(const unsigned long &n)
 unsigned long FindPrimeCount_Simple(const unsigned long &n)
 {
 unsigned long Summ = 0;
-	for(unsigned long i = 1; i < n; i++)
+	for(unsigned long i = 2; i < n; i++)
 	{
 		if(Simple_Cheak(i))
 		{
@@ -57,8 +57,28 @@ unsigned long finder(const unsigned long begin,unsigned long end)
 
 
 // Версия Александра Пономарева.
-unsigned long FindPrimeCount_DivBy2(const unsigned long &n){
-	return -1;
+bool Medium_Cheak(const unsigned long &n)
+{
+	if(n >= 1 && n <= 2) return true;
+	for(unsigned long i = 2; i < n/2+1; i++){
+		if(n % i == 0){
+			return false;
+		}
+	}
+	return true;
+}
+
+unsigned long FindPrimeCount_DivBy2(const unsigned long &n)
+{
+unsigned long Summ = 0;
+	for(unsigned long i = 2; i < n; i++)
+	{
+		if(Medium_Cheak(i))
+		{
+			Summ ++;
+		}
+	}
+	return Summ;
 }
 
 // Версия Егора.
